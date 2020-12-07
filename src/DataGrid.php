@@ -680,7 +680,7 @@ class DataGrid extends Control
 
 	public function getTemplateFile(): string
 	{
-		return $this->templateFile ?: $this->getOriginalTemplateFile();
+		return $this->templateFile ?? $this->getOriginalTemplateFile();
 	}
 
 
@@ -924,7 +924,7 @@ class DataGrid extends Control
 		?string $column = null
 	): ColumnText
 	{
-		$column = $column ?: $key;
+		$column = $column ?? $key;
 
 		$columnText = new ColumnText($this, $key, $column, $name);
 		$this->addColumn($key, $columnText);
@@ -941,8 +941,8 @@ class DataGrid extends Control
 		?array $params = null
 	): ColumnLink
 	{
-		$column = $column ?: $key;
-		$href = $href ?: $key;
+		$column = $column ?? $key;
+		$href = $href ?? $key;
 
 		if ($params === null) {
 			$params = [$this->primaryKey];
@@ -961,7 +961,7 @@ class DataGrid extends Control
 		?string $column = null
 	): ColumnNumber
 	{
-		$column = $column ?: $key;
+		$column = $column ?? $key;
 
 		$columnNumber = new ColumnNumber($this, $key, $column, $name);
 		$this->addColumn($key, $columnNumber);
@@ -976,7 +976,7 @@ class DataGrid extends Control
 		?string $column = null
 	): ColumnDateTime
 	{
-		$column = $column ?: $key;
+		$column = $column ?? $key;
 
 		$columnDateTime = new ColumnDateTime($this, $key, $column, $name);
 		$this->addColumn($key, $columnDateTime);
@@ -991,7 +991,7 @@ class DataGrid extends Control
 		?string $column = null
 	): ColumnStatus
 	{
-		$column = $column ?: $key;
+		$column = $column ?? $key;
 
 		$columnStatus = new ColumnStatus($this, $key, $column, $name);
 		$this->addColumn($key, $columnStatus);
@@ -1056,7 +1056,7 @@ class DataGrid extends Control
 	{
 		$this->addActionCheck($key);
 
-		$href = $href ?: $key;
+		$href = $href ?? $key;
 
 		if ($params === null) {
 			$params = [$this->primaryKey];
@@ -1190,7 +1190,7 @@ class DataGrid extends Control
 
 	public function addFilterDate(string $key, string $name, ?string $column = null): FilterDate
 	{
-		$column = $column ?: $key;
+		$column = $column ?? $key;
 
 		$this->addFilterCheck($key);
 
@@ -2337,9 +2337,7 @@ class DataGrid extends Control
 
 		$value = $request->getPost('value');
 
-		/**
-		 * @var mixed Could be null of course
-		 */
+		// Could be null of course
 		if ($column->getEditableCallback() === null) {
 			throw new \UnexpectedValueException;
 		}
@@ -2424,7 +2422,7 @@ class DataGrid extends Control
 	{
 		$this->snippetsSet = true;
 
-		$this->redrawItem = [($primaryWhereColumn ?: $this->primaryKey) => $id];
+		$this->redrawItem = [($primaryWhereColumn ?? $this->primaryKey) => $id];
 
 		$this->redrawControl('items');
 
@@ -2597,16 +2595,14 @@ class DataGrid extends Control
 	{
 		$itemsPerPageList = array_keys($this->getItemsPerPageList());
 
-		$perPage = $this->perPage ?: reset($itemsPerPageList);
+		$perPage = $this->perPage ?? reset($itemsPerPageList);
 
 		if (($perPage !== 'all' && !in_array((int) $this->perPage, $itemsPerPageList, true))
 			|| ($perPage === 'all' && !in_array($this->perPage, $itemsPerPageList, true))) {
 			$perPage = reset($itemsPerPageList);
 		}
 
-		return $perPage === 'all'
-			? 'all'
-			: (int) $perPage;
+		return $perPage === 'all' ? 'all' : (int) $perPage;
 	}
 
 
@@ -2776,7 +2772,7 @@ class DataGrid extends Control
 				: $defaultValue;
 		}
 
-		return ($key !== null ? $this->gridSession[$key] : $this->gridSession) ?: $defaultValue;
+		return ($key !== null ? $this->gridSession[$key] : $this->gridSession) ?? $defaultValue;
 	}
 
 
@@ -2821,7 +2817,7 @@ class DataGrid extends Control
 
 		$this->itemsDetail = new ItemDetail(
 			$this,
-			$primaryWhereColumn ?: $this->primaryKey
+			$primaryWhereColumn ?? $this->primaryKey
 		);
 
 		if (is_string($detail)) {
