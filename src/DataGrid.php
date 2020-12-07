@@ -2602,7 +2602,9 @@ class DataGrid extends Control
 			$perPage = reset($itemsPerPageList);
 		}
 
-		return $perPage === 'all' ? 'all' : (int) $perPage;
+		return $perPage === 'all'
+			? 'all'
+			: (int) $perPage;
 	}
 
 
