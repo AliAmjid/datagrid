@@ -126,7 +126,7 @@ final class DataModel
 		?DataGridPaginator $paginatorComponent,
 		Sorting $sorting,
 		array $filters
-	): iterable
+	): array
 	{
 		$this->onBeforeFilter($this->dataSource);
 

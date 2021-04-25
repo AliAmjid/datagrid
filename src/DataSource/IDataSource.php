@@ -18,7 +18,7 @@ interface IDataSource
 	/**
 	 * Get the data
 	 */
-	public function getData(): iterable;
+	public function getData(): array;
 
 	/**
 	 * Filter data
