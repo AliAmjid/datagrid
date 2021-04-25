@@ -105,11 +105,6 @@ class ApiDataSource implements IDataSource
 		}
 
 		/**
-		 * Download filtered data
-		 */
-		$this->data = $this->getData();
-
-		/**
 		 * Apply possible user filter callbacks
 		 */
 		foreach ($filters as $filter) {
@@ -139,6 +134,11 @@ class ApiDataSource implements IDataSource
 	{
 		$this->offset = $offset;
 		$this->limit = $limit;
+
+		/**
+		 * Download filtered data
+		 */
+		$this->data = $this->getData();
 
 		return $this;
 	}
